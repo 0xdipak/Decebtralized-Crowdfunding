@@ -1,25 +1,70 @@
-import Image from 'next/image'
+"use client";
+
+import Footer from "@/components/Footer";
+import Login from "@/components/Login";
+import Navbar from "@/components/Navbar";
+import { createContext, useEffect, useState } from "react";
+
+const AppState = createContext();
 
 export default function Home() {
+  const ethereum = window.ethereum;
+  const [login, setLogin] = useState(false);
+  const [wallet, setWallet] = useState("");
+
+  const connectWallet = async () => {
+    try {
+      if (!ethereum) return reportError("Please install Metamask");
+      const accounts = await ethereum.request?.({
+        method: "eth_requestAccounts",
+      });
+      setLogin(true);
+      setWallet(accounts?.[0]);
+    } catch (error) {}
+  };
+
+  const checkWallet = async () => {
+    try {
+      if (!ethereum) return reportError("Please install Metamsk");
+      const accounts = await ethereum.request?.({ method: "eth_accounts" });
+
+      ethereum.on("chainChanged", () => {
+        window.location.reload();
+      });
+
+      ethereum.on("accountsChanged", async () => {
+        setWallet(accounts?.[0]);
+        await checkWallet();
+      });
+
+      if (accounts?.length) {
+        setWallet(accounts?.[0]);
+      } else {
+        reportError("Plese connect wallet, Account not found");
+      }
+    } catch (error) {
+      reportError(error);
+    }
+  };
+
+  useEffect(() => {
+    checkWallet();
+  },[])
+
   return (
-    <main className="w-full h-screen bg-gray-500">
-      <div className="w-full  flex flex-col items-center justify-center pt-40">
-        <div className="bg-gray-700 p-16 rounded-lg shadow-lg">
-          <h1 className="text-5xl font-bold mb-6">Team Members</h1>
-          <div className="flex flex-col items-center justify-center space-y-3">
-            <p className="text-2xl font-semibold text-gray-400">Dipak Sharma</p>
-            <p className="text-2xl font-semibold text-gray-400">
-              Atrip Limbu (<span className='animate-pulse text-red-600 transition-all duration-200'> Tekando</span> )
-            </p>
-            <p className="text-2xl font-semibold text-gray-400">
-              Rabin Rana (<span className='animate-pulse text-red-600 transition-all duration-200'> Dude </span>)
-            </p>
-            <p className="text-2xl font-semibold text-gray-400">
-              Krish Gurung (<span className='animate-pulse text-red-600 transition-all duration-200'> Hanuman </span>)
-            </p>
+    <AppState.Provider value={{ login, setLogin, connectWallet, wallet }}>
+      <div className="min-w-full h-screen radial-gradient">
+        {login ? (
+          <div className="">
+            <Navbar />
+            {/* <Footer /> */}
           </div>
-        </div>
+        ) : (
+          <Login />
+        )}
       </div>
-    </main>
+    </AppState.Provider>
   );
 }
+
+export { AppState };

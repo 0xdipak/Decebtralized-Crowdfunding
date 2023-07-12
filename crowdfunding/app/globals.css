@@ -2,7 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-.background {
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.radial-gradient {
+  background-image: radial-gradient(66.89% 66.89% at 50% 33.11%, #1C1643 0%, #16112E 42.71%, #0D0B15 87.09%);
+  background-size: 100% 100%;
+  background-color: black;
+}
+
+/* .background {
   background-color: #644df6;
 }
 
@@ -21,4 +45,5 @@
   position: absolute;
   bottom: -1.9rem;
   z-index: 3;
-}
+} */
+

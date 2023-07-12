@@ -1,7 +1,13 @@
+'use client'
+import { AppState } from '@/app/page';
 import Link from 'next/link';
-import React from 'react'
+import React, { useContext } from 'react'
 
 const Navbar = () => {
+
+  const App = useContext(AppState)
+
+
   return (
     <div className="backgroundMain fixed top-0 w-full">
       <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
@@ -49,7 +55,7 @@ const Navbar = () => {
                     text-white transition duration-200 rounded shadow-md bg-purple-400 hover:bg-purple-700
                     focus:shadow-outline focus:outline-none background"
             >
-              Connect Wallet
+              {App.wallet.slice(0,5)}...{App.wallet.slice(38)}
             </button>
           </div>
         </div>
