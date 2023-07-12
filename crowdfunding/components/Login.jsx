@@ -18,7 +18,7 @@ const Login = () => {
         flex-col justify-center items-center"
       >
         <h1 className="text-white md:text-2xl font-medium text-center">Login</h1>
-        {ethereum != undefined ? (
+        {window.ethereum != undefined ? (
           <div
             onClick={App.connectWallet}
             className="flex border-opacity-60 bg-opacity-90 text-sm lg:text-lg font-medium border-2
