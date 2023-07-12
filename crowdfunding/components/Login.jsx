@@ -5,7 +5,7 @@ import { useContext} from 'react';
 import { AppState } from '@/app/page';
 
 const Login = () => {
-  const ethereum = window.ethereum;
+  // const ethereum = window.ethereum;
     const App = useContext(AppState);
 
 
