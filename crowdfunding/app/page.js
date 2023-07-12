@@ -8,7 +8,7 @@ import { createContext, useEffect, useState } from "react";
 const AppState = createContext();
 
 export default function Home() {
-  const ethereum = window.ethereum;
+  // const ethereum = window.ethereum;
   const [login, setLogin] = useState(false);
   const [wallet, setWallet] = useState("");
 
