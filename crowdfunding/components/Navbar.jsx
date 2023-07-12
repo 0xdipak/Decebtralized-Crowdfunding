@@ -10,7 +10,7 @@ const Navbar = () => {
         <div className="relative flex items-center justify-between">
           <div className="flex items-center">
             <Link href="/" className="inline-flex items-center mr-8">
-              <span className="ml-2 text-xl font-bold tracking-wide text-gray-100 uppercase">
+              <span className="ml-2 text-3xl lg:text-5xl font-bold tracking-wide text-gray-100 uppercase">
                 CW
               </span>
             </Link>
@@ -19,7 +19,7 @@ const Navbar = () => {
                 <Link
                   href="/proposal"
                   className="font-medium tracking-wide text-gray-100 transition-colors duration-200
-                            hover:text-teal-200"
+                            hover:text-teal-200 lg:text-xl"
                 >
                   Proposal
                 </Link>
@@ -28,7 +28,7 @@ const Navbar = () => {
                 <Link
                   href="/donation"
                   className="font-medium tracking-wide text-gray-100 transition-colors duration-200
-                            hover:text-teal-200"
+                            hover:text-teal-200 lg:text-xl"
                 >
                   Donation
                 </Link>
@@ -37,7 +37,7 @@ const Navbar = () => {
                 <Link
                   href="/members"
                   className="font-medium tracking-wide text-gray-100 transition-colors duration-200
-                            hover:text-teal-200"
+                            hover:text-teal-200 lg:text-xl"
                 >
                   Members
                 </Link>
