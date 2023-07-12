@@ -1,11 +1,7 @@
-'use client'
-import { AppState } from '@/app/page';
 import Link from 'next/link';
-import React, { useContext } from 'react'
+import Login from './Login';
 
 const Navbar = () => {
-
-  const App = useContext(AppState)
 
 
   return (
@@ -50,13 +46,13 @@ const Navbar = () => {
           </div>
 
           <div className="items-center hidden space-x-8 md:flex">
-            <button
+            <div
               className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide
-                    text-white transition duration-200 rounded shadow-md bg-purple-400 hover:bg-purple-700
+                    text-white transition duration-200 rounded shadow-md bg-purple-600 hover:bg-purple-900
                     focus:shadow-outline focus:outline-none background"
             >
-              {App.wallet.slice(0,5)}...{App.wallet.slice(38)}
-            </button>
+              <Login />
+            </div>
           </div>
         </div>
       </div>
