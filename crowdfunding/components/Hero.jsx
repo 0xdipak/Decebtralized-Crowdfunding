@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image';
 import imgUrl from '../assets/crowd.jpg'
-import Identicon from "react-identicons";
+
 
 const Hero = () => {
   return (
