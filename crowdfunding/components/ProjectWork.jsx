@@ -1,5 +1,7 @@
+'use client'
 import Image from "next/image";
 import imgUrl from "../assets/crowd.jpg";
+import { setGlobalState } from "@/store";
 
 const ProjectWork = () => {
   return (
@@ -55,6 +57,7 @@ const Card =({ nft }) => (
       <button
         className="shadow-lg shadow-black text-sm bg-[#e32970]
         hover:bg-[#bd255f] rounded-full px-1.5 py-1"
+        onClick={() => setGlobalState('showModal','scale-100')}
       >
         View Details
       </button>

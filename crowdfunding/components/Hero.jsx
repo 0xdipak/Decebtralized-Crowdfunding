@@ -1,6 +1,7 @@
 'use client'
 import Image from 'next/image';
 import imgUrl from '../assets/crowd.jpg'
+import { setGlobalState } from '@/store';
 
 
 const Hero = () => {

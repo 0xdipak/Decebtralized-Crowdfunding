@@ -18,7 +18,7 @@ const Footer = () => {
         >
           <p className="cursor-pointer mx-2">Home</p>
           <p className="cursor-pointer mx-2">Proposal</p>
-          <p className="cursor-pointer mx-2">features</p>
+          <p className="cursor-pointer mx-2">Members</p>
           <p className="cursor-pointer mx-2">Contact</p>
         </div>
         <div className="flex flex-[0.25] justify-center items-center mt-3">
