@@ -12,9 +12,11 @@ import { createContext, useState, useEffect } from "react";
 const AppData = createContext();
 
 export default function Home() {
-  const { ethereum } = window;
+  if (typeof window === "object") {
+    const { ethereum } = window;
+  }
   const [address, setAddress] = useState("");
-  const [balance, setBalance] = useState('5 ETH');
+  const [balance, setBalance] = useState("5 ETH");
 
   const connectWallet = async () => {
     try {
@@ -38,7 +40,7 @@ export default function Home() {
     setBalance(ethers.utils.formatEther(balance));
   };
 
-  console.log(balance)
+  console.log(balance);
 
   const isWalletConnected = async () => {
     try {
@@ -69,7 +71,7 @@ export default function Home() {
 
   useEffect(() => {
     isWalletConnected();
-    getBalance()
+    getBalance();
   }, []);
   return (
     <AppData.Provider value={{ address, balance, connectWallet }}>
