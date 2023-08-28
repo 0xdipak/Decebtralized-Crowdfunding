@@ -16,7 +16,7 @@ export default function Home() {
     const { ethereum } = window;
   }
   const [address, setAddress] = useState("");
-  const [balance, setBalance] = useState("5 ETH");
+  const [balance, setBalance] = useState("");
 
   const connectWallet = async () => {
     try {
