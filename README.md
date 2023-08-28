@@ -1,4 +1,4 @@
-# BERNTODO-APP Project
+# Decentralized CrowdFunding Project
 
 ## Overview
 
