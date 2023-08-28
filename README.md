@@ -31,7 +31,7 @@ To run the Decentralized Crowdfunding Project, follow these instructions:
 
 1. Start the application: `npm run dev`
 2. The application will run on http://localhost:portNumber
-3. Checkout Live application on: `https://decebtralized-crowdfunding.vercel.app`
+3. Checkout Live application on: https://decebtralized-crowdfunding.vercel.app
 
 ## Technologies Used
 
