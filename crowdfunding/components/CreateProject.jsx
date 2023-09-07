@@ -42,7 +42,7 @@ const CreateProject = () => {
         const metadataURI = `https://gateway.pinata.cloud/ipfs/${resFile.data.IpfsHash}`;
         setLoadingMsg("Intializing transaction...");
         setFile(metadataURI);
-        await App.projectContract.createProject(
+        const tx = await App.projectContract.createProject(
           App.address,
           title,
           description,
@@ -50,7 +50,8 @@ const CreateProject = () => {
           ethers.utils.parseEther(targetAmount),
           toTimestamp(deadline),
         );
-        setAlert("Project Successfully Completed...");
+        await tx.wait();
+        setAlert("Project Successfully Created...");
         window.location.reload();
       } catch (error) {
         console.log(error);

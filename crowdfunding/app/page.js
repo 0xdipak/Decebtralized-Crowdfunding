@@ -10,19 +10,31 @@ import { ethers } from "ethers";
 import { createContext, useState, useEffect } from "react";
 // import { abi, contractAddress } from "@/services/constants";
 import abi from "./contractabi.json";
+import Loading from "@/components/Loading";
+import Alert from "@/components/Alert";
+import { setAlert, setGlobalState } from "@/store";
 
 const AppData = createContext();
 
 export default function Home() {
-  typeof window === "object" ? { ethereum } : null;
-  const contractAddress = "0xC454C0f22299c8972c4E27B62B242C2D2AcDf84D";
-  const provider = new ethers.providers.Web3Provider(ethereum);
-  const signer = provider.getSigner();
-  const projectContract = new ethers.Contract(contractAddress, abi, signer);
+
+  let ethereum;
+  if (
+    typeof window.ethereum !== "undefined" ||
+    typeof window.web3 !== "undefined"
+  ) {
+     ethereum = window.ethereum;
+  }
   const [address, setAddress] = useState("");
   const [balance, setBalance] = useState("");
   const [projects, setProjects] = useState([]);
   const [txData, setTxData] = useState([]);
+  
+  const contractAddress = "0xC454C0f22299c8972c4E27B62B242C2D2AcDf84D";
+  const provider = new ethers.providers.Web3Provider(ethereum);
+  const signer = provider.getSigner();
+  const projectContract = new ethers.Contract(contractAddress, abi, signer);
+
 
   const connectWallet = async () => {
     try {
@@ -38,6 +50,7 @@ export default function Home() {
       console.log(error);
     }
   };
+
 
   const getBalance = async () => {
     const provider = new ethers.providers.Web3Provider(ethereum);
@@ -74,8 +87,10 @@ export default function Home() {
   };
 
   const getProjects = async () => {
+    setGlobalState("loading", { show: true, msg: "Fetching Projects..." });
     const data = await projectContract.getProjects();
     setProjects(data);
+    setAlert("Success");
   };
 
   const allTxnData = async () => {
@@ -85,6 +100,7 @@ export default function Home() {
   };
 
   useEffect(() => {
+
     isWalletConnected();
     getBalance();
     getProjects();
@@ -111,6 +127,8 @@ export default function Home() {
         <Footer />
         <CreateProject />
         <ShowProject />
+        <Alert />
+        <Loading />
       </div>
     </AppData.Provider>
   );
