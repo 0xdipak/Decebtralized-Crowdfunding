@@ -9,24 +9,20 @@ import Transactions from "@/components/Transactions";
 import { ethers } from "ethers";
 import { createContext, useState, useEffect } from "react";
 // import { abi, contractAddress } from "@/services/constants";
-import abi from './contractabi.json'
+import abi from "./contractabi.json";
 
 const AppData = createContext();
 
 export default function Home() {
-  if (typeof window === "object") {
-    const { ethereum } = window;
-  }
+  typeof window === "object" ? { ethereum } : null;
   const contractAddress = "0xC454C0f22299c8972c4E27B62B242C2D2AcDf84D";
+  const provider = new ethers.providers.Web3Provider(ethereum);
+  const signer = provider.getSigner();
+  const projectContract = new ethers.Contract(contractAddress, abi, signer);
   const [address, setAddress] = useState("");
   const [balance, setBalance] = useState("");
   const [projects, setProjects] = useState([]);
   const [txData, setTxData] = useState([]);
-
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
-  const signer = provider.getSigner();
-  const projectContract = new ethers.Contract(contractAddress, abi, signer);
-
 
   const connectWallet = async () => {
     try {
@@ -80,15 +76,13 @@ export default function Home() {
   const getProjects = async () => {
     const data = await projectContract.getProjects();
     setProjects(data);
-  }
+  };
 
   const allTxnData = async () => {
     const tx = await projectContract.filters.Transactions();
     const txdata = await projectContract.queryFilter(tx);
-    setTxData(txdata)
-  }
-
-
+    setTxData(txdata);
+  };
 
   useEffect(() => {
     isWalletConnected();
@@ -97,7 +91,16 @@ export default function Home() {
     allTxnData();
   }, []);
   return (
-    <AppData.Provider value={{ address, balance, connectWallet, projectContract, projects, txData }}>
+    <AppData.Provider
+      value={{
+        address,
+        balance,
+        connectWallet,
+        projectContract,
+        projects,
+        txData,
+      }}
+    >
       <div className="min-h-screen">
         <div className="gradient-bg-hero">
           <Header />
