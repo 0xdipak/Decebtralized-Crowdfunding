@@ -8,6 +8,7 @@ import ShowProject from "@/components/ShowProject";
 import Transactions from "@/components/Transactions";
 import { ethers } from "ethers";
 import { createContext, useState, useEffect } from "react";
+import { abi, contractAddress } from "@/services/constants";
 
 const AppData = createContext();
 
@@ -17,6 +18,13 @@ export default function Home() {
   }
   const [address, setAddress] = useState("");
   const [balance, setBalance] = useState("");
+  const [projects, setProjects] = useState([]);
+  const [txData, setTxData] = useState([]);
+
+  const provider = new ethers.providers.Web3Provider(ethereum);
+  const signer = provider.getSigner();
+  const projectContract = new ethers.Contract(contractAddress, abi, signer);
+
 
   const connectWallet = async () => {
     try {
@@ -39,8 +47,6 @@ export default function Home() {
     const balance = await signer.getBalance();
     setBalance(ethers.utils.formatEther(balance));
   };
-
-  console.log(balance);
 
   const isWalletConnected = async () => {
     try {
@@ -69,12 +75,27 @@ export default function Home() {
     }
   };
 
+  const getProjects = async () => {
+    const data = await projectContract.getProjects();
+    setProjects(data);
+  }
+
+  const allTxnData = async () => {
+    const tx = await projectContract.filters.Transactions();
+    const txdata = await projectContract.queryFilter(tx);
+    setTxData(txdata)
+  }
+
+
+
   useEffect(() => {
     isWalletConnected();
     getBalance();
+    getProjects();
+    allTxnData();
   }, []);
   return (
-    <AppData.Provider value={{ address, balance, connectWallet }}>
+    <AppData.Provider value={{ address, balance, connectWallet, projectContract, projects, txData }}>
       <div className="min-h-screen">
         <div className="gradient-bg-hero">
           <Header />

@@ -1,6 +1,6 @@
 'use client'
 import Image from "next/image";
-import timeless from "../assets/timeless.png";
+import logo from "../assets/logo.png";
 import Link from "next/link";
 import { useContext } from "react";
 import { AppData } from "@/app/page";
@@ -12,8 +12,8 @@ const Header = () => {
     <div className="w-4/5 flex justify-between md:justify-center items-center py-4 mx-auto">
       <div className="md:flex-[0.5] flex-initial justify-center items-center">
         <Image
-          className="md:w-32 w-40 cursor-pointer"
-          src={timeless}
+          className="md:w-32 w-40 cursor-pointer lg:w-36"
+          src={logo}
           alt="logo"
         />
       </div>
@@ -38,7 +38,7 @@ const Header = () => {
 
       {App.address ? (
         <button
-          className="shadow-xl shadow-black text-white bg-[#e32970] hover:bg-[#bd255f]
+          className="shadow-xl text-sm shadow-black text-white bg-[#e32970] hover:bg-[#bd255f]
       md:text-xs p-2 rounded-full ml-12"
           onClick={App.connectWallet}
         >

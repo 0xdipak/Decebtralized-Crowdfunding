@@ -1,5 +1,5 @@
 import Image from "next/image";
-import timeless from "../assets/timeless.png";
+import logo from "../assets/logo.png";
 
 const Footer = () => {
   return (
@@ -9,7 +9,7 @@ const Footer = () => {
     >
       <div className="w-full flex flex-col sm:flex-row justify-between items-center my-4">
         <div className="flex flex-[0.25] justify-center items-center">
-          <Image className="w-32" src={timeless} alt="logo" />
+          <Image className="w-32" src={logo} alt="logo" />
         </div>
 
         <div

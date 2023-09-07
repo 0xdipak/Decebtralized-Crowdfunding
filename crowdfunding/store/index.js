@@ -4,7 +4,23 @@ const { setGlobalState, useGlobalState, getGlobalState } = createGlobalState({
   modal: "scale-0",
   showModal: "scale-0",
   updateModal: "scale-0",
+  project: null,
+  loading: { show: false, msg: "Transaction in progress..." },
+  alert: { show: false, msg: "", color: "" },
 });
+
+const setAlert = (msg, color = "green") => {
+  setGlobalState("loading", { show: false, msg: "" });
+  setGlobalState("alert", { show: true, msg, color });
+  setTimeout(() => {
+    setGlobalState("alert", { show: false, msg, color });
+  }, 600);
+};
+
+const setLoadingMsg = (msg) => {
+  const loading = getGlobalState("loading");
+  setGlobalState("loading", { show: true, msg });
+};
 
 
 const truncate = (text, startChars, endChars, maxLength) => {
@@ -20,4 +36,4 @@ const truncate = (text, startChars, endChars, maxLength) => {
 };
 
 
-export {setGlobalState, useGlobalState, getGlobalState,truncate}
+export {setGlobalState, useGlobalState, getGlobalState,truncate, setAlert, setLoadingMsg}
