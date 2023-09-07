@@ -23,7 +23,7 @@ export default function Home() {
   const [projects, setProjects] = useState([]);
   const [txData, setTxData] = useState([]);
 
-  const provider = new ethers.providers.Web3Provider(ethereum);
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const projectContract = new ethers.Contract(contractAddress, abi, signer);
 
