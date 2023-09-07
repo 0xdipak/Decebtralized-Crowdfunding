@@ -8,7 +8,8 @@ import ShowProject from "@/components/ShowProject";
 import Transactions from "@/components/Transactions";
 import { ethers } from "ethers";
 import { createContext, useState, useEffect } from "react";
-import { abi, contractAddress } from "@/services/constants";
+// import { abi, contractAddress } from "@/services/constants";
+import abi from './contractabi.json'
 
 const AppData = createContext();
 
@@ -16,6 +17,7 @@ export default function Home() {
   if (typeof window === "object") {
     const { ethereum } = window;
   }
+  const contractAddress = "0xC454C0f22299c8972c4E27B62B242C2D2AcDf84D";
   const [address, setAddress] = useState("");
   const [balance, setBalance] = useState("");
   const [projects, setProjects] = useState([]);
